@@ -1,4 +1,4 @@
-import 'dart:developer';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 
@@ -23,7 +23,8 @@ class DicePage extends StatefulWidget {
 }
 
 class _DicePageState extends State<DicePage> {
-  int leftDiceNUmber = 1;
+  int leftDiceNumber = 1;
+  int rightDiceNumber = 2;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -33,19 +34,22 @@ class _DicePageState extends State<DicePage> {
             child: FlatButton(
               onPressed: () {
                 setState(() {
-                  leftDiceNUmber += 1;
-                  if (leftDiceNUmber > 6) leftDiceNUmber %= 6;
+                  leftDiceNumber = Random().nextInt(6) + 1;
+                  rightDiceNumber = Random().nextInt(6) + 1;
                 });
               },
-              child: Image.asset('images/dice$leftDiceNUmber.png'),
+              child: Image.asset('images/dice$leftDiceNumber.png'),
             ),
           ),
           Expanded(
             child: FlatButton(
               onPressed: () {
-                print('Right!!');
+                setState(() {
+                  leftDiceNumber = Random().nextInt(6) + 1;
+                  rightDiceNumber = Random().nextInt(6) + 1;
+                });
               },
-              child: Image.asset('images/dice2.png'),
+              child: Image.asset('images/dice$rightDiceNumber.png'),
             ),
           ),
         ],
